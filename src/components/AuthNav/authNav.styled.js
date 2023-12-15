@@ -9,8 +9,8 @@ export const ActivePage = styled(NavLink)`
   font-weight: 500;
   display: inline-block;
   text-decoration: none;
-  padding: 14px;
-  margin-left: 50px;
+  // padding: 14px;
+  // margin-left: 50px;
   font-weight: 600;
   font-size: 22px;
   color: rgba(32, 29, 16, 0.842);
