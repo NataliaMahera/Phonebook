@@ -1,18 +1,24 @@
 import AuthNav from 'components/AuthNav/AuthNav';
 import Navigation from 'components/Navigation/Navigation';
 import UserMenu from 'components/UserMenu/UserMenu';
-import React from 'react';
 import { useSelector } from 'react-redux';
 import { selectAuthIsLoggedIn } from 'redux/auth/authSelectors';
-import css from './AppBar.module.css';
+import { Stack } from '@chakra-ui/react';
 
 const AppBar = () => {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
   return (
-    <header className={css.header}>
+    <Stack
+      as={'header'}
+      direction={'row'}
+      alignItems={'center'}
+      justifyContent={'space-between'}
+      p={[2, 4, 6, 8]}
+      bgGradient="linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)"
+    >
       <Navigation />
       {isLoggedIn ? <UserMenu /> : <AuthNav />}
-    </header>
+    </Stack>
   );
 };
 
