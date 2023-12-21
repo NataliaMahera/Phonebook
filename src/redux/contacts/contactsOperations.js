@@ -40,3 +40,18 @@ export const deleteContactsThunk = createAsyncThunk(
     }
   }
 );
+
+export const updateContactThunk = createAsyncThunk(
+  'contacts/updateContact',
+  async (contactId, modalData, thunkApi) => {
+    try {
+      const { data } = await instance.patch(
+        `/contacts/${contactId}`,
+        modalData
+      );
+      return data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

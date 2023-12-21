@@ -13,7 +13,7 @@ const AppBar = () => {
       direction={'row'}
       alignItems={'center'}
       justifyContent={'space-between'}
-      p={[2, 4, 6, 8]}
+      p={[4, 4, 6]}
       bgGradient="linear-gradient(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)"
     >
       <Navigation />

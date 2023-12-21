@@ -3,11 +3,13 @@ import {
   addContactsThunk,
   deleteContactsThunk,
   getContactsThunk,
+  updateContactThunk,
 } from './contactsOperations';
 import {
   handleFulfilledAdd,
   handleFulfilledDelete,
   handleFulfilledGet,
+  handleFulfilledUpdate,
   handlePending,
   handleRejected,
 } from './contactsFunctionsReducer';
@@ -22,7 +24,8 @@ const getActions = type =>
   isAnyOf(
     addContactsThunk[type],
     deleteContactsThunk[type],
-    getContactsThunk[type]
+    getContactsThunk[type],
+    updateContactThunk[type]
   );
 
 const initialState = { contactItems: [], isLoading: false, error: null };
@@ -36,6 +39,7 @@ export const contactsSlice = createSlice({
       .addCase(getContactsThunk.fulfilled, handleFulfilledGet)
       .addCase(addContactsThunk.fulfilled, handleFulfilledAdd)
       .addCase(deleteContactsThunk.fulfilled, handleFulfilledDelete)
+      .addCase(updateContactThunk.fulfilled, handleFulfilledUpdate)
       .addMatcher(getActions(PENDING), handlePending)
       .addMatcher(getActions(REJECTED), handleRejected);
   },

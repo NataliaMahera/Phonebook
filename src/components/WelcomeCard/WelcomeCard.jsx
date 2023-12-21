@@ -18,7 +18,7 @@ const WelcomeCard = () => {
       margin={'auto'}
       align="center"
       variant="filled"
-      w={[300, 400, 500]}
+      w={['100vw', 400, 500]}
       p={5}
       bg="gray.50"
       borderRadius="lg"
@@ -26,8 +26,7 @@ const WelcomeCard = () => {
     >
       <CardHeader>
         <Heading
-          fontSize={{ base: '20px', md: '24px', lg: '32px' }}
-          mb={5}
+          fontSize={{ base: '24px', md: '24px', lg: '32px' }}
           bgGradient="linear(to-l, #7928CA, #FF0080)"
           bgClip="text"
           fontWeight="bold"
@@ -44,7 +43,7 @@ const WelcomeCard = () => {
             </Heading>
             <Text pt="2" fontSize="sm">
               Phonebook is a user-friendly application designed to organize your
-              personal phonebook. You can STORE, MANAGE, and quickly FIND all
+              personal phonebook. You can store, manage, and quickly find all
               your contacts.
             </Text>
           </Box>
@@ -91,6 +90,7 @@ const WelcomeCard = () => {
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 bgClip="text"
                 href="https://github.com/NataliaMahera"
+                target="_blank"
               >
                 Support team
               </Link>

@@ -9,7 +9,7 @@ const AuthNav = () => {
       <Flex
         direction={['row']}
         alignItems={'center'}
-        gap={['12px', '12px', '32px', '32px']}
+        gap={['14px', '14px', '40px', '40px']}
       >
         <Box>
           <Link as={NavLink} to="/register">

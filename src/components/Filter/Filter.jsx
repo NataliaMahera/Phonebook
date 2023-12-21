@@ -1,7 +1,14 @@
 import { useDispatch, useSelector } from 'react-redux';
-import css from './Filter.module.css';
 import { selectFilter } from 'redux/contacts/contactsSelectors';
 import { changeFilter } from 'redux/contacts/filterSlice';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+} from '@chakra-ui/react';
+import { SearchIcon } from '@chakra-ui/icons';
 
 // Компонент фільтрації контактів
 const Filter = () => {
@@ -13,19 +20,37 @@ const Filter = () => {
     dispatch(changeFilter(newValue));
   };
   return (
-    <>
-      <label className={css.filterLabel}>
-        <p className={css.description}>Find contacts by name</p>
-        <input
+    <FormControl mt={8} mb={5}>
+      <FormLabel
+        fontSize={{ base: '16px', md: '19px', lg: '19px' }}
+        mb={3}
+        textAlign={'center'}
+        bgGradient="linear(to-l, #7928CA, #FF0080)"
+        bgClip="text"
+        fontWeight="bold"
+      >
+        Find contact by name or phone
+      </FormLabel>
+      <InputGroup mt={1}>
+        <InputLeftAddon>
+          <SearchIcon
+            w={4}
+            h={4}
+            bgGradient="linear(to-r, green.200, pink.500)"
+            borderRadius={2}
+            color="black"
+          />
+        </InputLeftAddon>
+        <Input
           type="text"
           name="filter"
-          className={css.input}
           value={filterQuery}
           onChange={onChangeFilter}
+          autoComplete="off"
           placeholder="Enter your contact"
         />
-      </label>
-    </>
+      </InputGroup>
+    </FormControl>
   );
 };
 

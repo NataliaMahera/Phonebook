@@ -20,6 +20,13 @@ export const handleFulfilledDelete = (state, { payload }) => {
   state.contactItems = state.contactItems.filter(({ id }) => id !== payload.id);
 };
 
+export const handleFulfilledUpdate = (state, { payload }) => {
+  state.isLoading = false;
+  state.error = null;
+  const index = state.contactItems.findIndex(({ id }) => id === payload.id);
+  state.contactItems.splice(index, 1, payload);
+};
+
 export const handleRejected = (state, { payload }) => {
   state.isLoading = false;
   state.error = payload;
