@@ -200,30 +200,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-{
-  /* <form onSubmit={onLoginSubmit} className={css.form}>
-<label className={css.label}>
-  <p>Email</p>
-  <input type="email" name="userEmail" className={css.input} required />
-</label>
-
-<label className={css.label}>
-  <p>Password</p>
-  <input
-    type="password"
-    name="userPassword"
-    className={css.input}
-    minLength={7}
-    required
-  />
-</label>
-
-<button type="submit" className={css.addBtn}>
-  Sign in
-</button>
-<Link className={css.link} to="/register">
-  Don't have an acount? Sign in
-</Link>
-</form> */
-}
