@@ -1,5 +1,4 @@
 import { extendTheme } from '@chakra-ui/react';
-// import { modalTheme } from './modal';
 
 const breakpoints = {
   sm: '30em', // 480px
@@ -35,9 +34,15 @@ const styles = {
 
 export const theme = extendTheme({
   colors: {
-    app: {
-      white: 'hsl(0, 0%, 100%)',
-      black: 'hsl(0, 0%, 0%)',
+    brand: {
+      50: 'gray',
+      100: 'gray',
+      200: '#E2E8F0',
+      300: '#CBD5E0',
+      400: '#A0AEC0',
+      500: '#718096',
+      600: 'gray',
+      900: '#171923',
     },
   },
   fonts: {
@@ -47,6 +52,47 @@ export const theme = extendTheme({
   breakpoints,
   styles,
   components: {
-    // Modal: modalTheme,
+    Button: {
+      variants: {
+        brand: props => ({
+          bg: props.colorMode === 'dark' ? 'brand.400' : 'brand.300',
+        }),
+      },
+    },
+    Card: {
+      variants: {
+        brand: props => ({
+          bg: props.colorMode === 'dark' ? 'brand.400' : 'brand.50',
+        }),
+      },
+    },
+    InputGroup: {
+      variants: {
+        brand: props => ({
+          color: props.colorMode === 'dark' ? 'brand.100' : 'brand.200',
+        }),
+      },
+    },
+    Text: {
+      variants: {
+        brand: props => ({
+          color: props.colorMode === 'dark' ? 'brand.400' : 'brand.900',
+        }),
+      },
+    },
+    Link: {
+      variants: {
+        brand: props => ({
+          color: props.colorMode === 'dark' ? 'brand.200' : 'brand.900',
+        }),
+      },
+    },
+    FormLabel: {
+      variants: {
+        brand: props => ({
+          color: props.colorMode === 'dark' ? 'brand.300' : 'brand.900',
+        }),
+      },
+    },
   },
 });

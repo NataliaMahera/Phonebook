@@ -2,7 +2,6 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAuthUser } from 'redux/auth/authSelectors';
 import { logoutThunk } from 'redux/auth/authOperations';
-import css from './UserMenu.module.css';
 import {
   Avatar,
   AvatarBadge,
@@ -48,7 +47,7 @@ const UserMenu = () => {
         </Flex>
         <Box>
           <Button
-            className={css.logOutBtn}
+            boxShadow="lg"
             onClick={() => dispatch(logoutThunk())}
             leftIcon={<ArrowLeftIcon w={3} h={3} mr={'3px'} />}
           >

@@ -9,10 +9,11 @@ import {
 } from '@chakra-ui/react';
 import { Box, Flex } from '@chakra-ui/react';
 import { HamburgerIcon } from '@chakra-ui/icons';
+import ThemeToggler from 'components/ThemeToggler/ThemeToggler';
 
 const Navigation = () => {
   return (
-    <Box>
+    <Box display={'flex'} gap={2}>
       <Flex
         display={['none', 'none', 'flex', 'flex']}
         as={'nav'}
@@ -31,7 +32,6 @@ const Navigation = () => {
           </Link>
         </Box>
       </Flex>
-
       {/* BurgerMenu */}
       <Menu>
         <MenuButton
@@ -47,17 +47,18 @@ const Navigation = () => {
         />
         <MenuList boxShadow="dark-lg">
           <MenuItem>
-            <Link as={NavLink} color="black" to="/">
+            <Link as={NavLink} variant={'brand'} to="/">
               Home
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link as={NavLink} color="black" to="/contacts">
+            <Link as={NavLink} variant={'brand'} to="/contacts">
               Contacts
             </Link>
           </MenuItem>
         </MenuList>
       </Menu>
+      <ThemeToggler />
     </Box>
   );
 };

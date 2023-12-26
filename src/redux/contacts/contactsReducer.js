@@ -45,5 +45,4 @@ export const contactsSlice = createSlice({
   },
 });
 
-// Редюсер слайсу (підключаємо в store)
 export const contactsReducer = contactsSlice.reducer;

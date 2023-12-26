@@ -1,9 +1,4 @@
-// import { useEffect } from 'react';
 import css from './UpdateModal.module.css';
-// import { useDispatch } from 'react-redux';
-// import ContactsForm from 'components/ContactsForm/ContactsForm';
-// import { closeModal } from 'redux/modal/modalReducer';
-
 import {
   AtSignIcon,
   CheckIcon,
@@ -18,10 +13,11 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  Box,
   Stack,
   Text,
   Flex,
+  Card,
+  Box,
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -42,12 +38,14 @@ export const UpdateModal = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const modalData = {
+    const formData = {
       name: userData.name,
       number: userData.number,
     };
 
-    dispatch(updateContactThunk({ contactId: modalData.id, modalData }));
+    dispatch(updateContactThunk({ contactId: modalData.id, formData }));
+    console.log(formData);
+
     dispatch(closeModal());
   };
 
@@ -82,22 +80,22 @@ export const UpdateModal = () => {
       <div className={css.overlay} onClick={handleOverlayClick}>
         <Formik>
           <Form onSubmit={handleSubmit}>
-            <Box>
-              <Box
-                position={'absolute'}
-                top={'50%'}
-                left={'50%'}
-                transform={'translate(-50%, -50%)'}
-                w={[300, 400, 400]}
-                m="auto"
-                pt={3}
-                pr={5}
-                pl={5}
-                pb={5}
-                borderRadius="md"
-                boxShadow="2xl"
-                bgColor={'white'}
-              >
+            <Card
+              position={'absolute'}
+              top={'50%'}
+              left={'50%'}
+              transform={'translate(-50%, -50%)'}
+              w={[300, 400, 400]}
+              m="auto"
+              pt={3}
+              pr={5}
+              pl={5}
+              pb={5}
+              borderRadius="md"
+              boxShadow="2xl"
+              variant={'brand'}
+            >
+              <Box>
                 <FormControl color={'white'} marginBottom={'12px'}>
                   <Stack>
                     <Text
@@ -114,7 +112,7 @@ export const UpdateModal = () => {
                     <Text
                       fontSize={{ base: '14px', md: '17px', lg: '17px' }}
                       textAlign={'center'}
-                      color={'gray.500'}
+                      variant={'brand'}
                     >
                       <InfoOutlineIcon
                         w={4}
@@ -127,61 +125,54 @@ export const UpdateModal = () => {
                   </Stack>
                 </FormControl>
                 <FormControl color="black" marginBottom={'12px'}>
-                  <FormLabel color="black" fontSize={'15px'}>
+                  <FormLabel variant={'brand'} fontSize={'15px'}>
                     Name
                   </FormLabel>
-                  <InputGroup mt={1}>
-                    <InputLeftAddon>
-                      <AtSignIcon
-                        w={4}
-                        h={4}
-                        bgGradient="linear(to-r, green.200, pink.500)"
-                        borderRadius={2}
-                        color="black"
+                  <Card bg={'transparent'} variant={'brand'} boxShadow="md">
+                    <InputGroup mt={1}>
+                      <InputLeftAddon>
+                        <AtSignIcon w={4} h={4} borderRadius={2} />
+                      </InputLeftAddon>
+                      <Input
+                        variant="outline"
+                        type="text"
+                        name="name"
+                        value={userData.name}
+                        onChange={handleChange}
+                        boxShadow={'linear(to-r, green.200, pink.500)'}
                       />
-                    </InputLeftAddon>
-                    <Input
-                      variant="outline"
-                      type="text"
-                      name="name"
-                      value={userData.name}
-                      onChange={handleChange}
-                      boxShadow={'linear(to-r, green.200, pink.500)'}
-                    />
-                  </InputGroup>
+                    </InputGroup>
+                  </Card>
                 </FormControl>
                 <FormControl color="black" marginBottom={'12px'}>
-                  <FormLabel color="black" fontSize={'15px'}>
+                  <FormLabel variant={'brand'} fontSize={'15px'}>
                     Phone number
                   </FormLabel>
-                  <InputGroup mt={1}>
-                    <InputLeftAddon>
-                      <PhoneIcon
-                        w={4}
-                        h={4}
-                        color="black"
-                        bgGradient="linear(to-r, green.200, pink.500)"
-                        borderRadius={2}
+                  <Card bg={'transparent'} variant={'brand'} boxShadow="md">
+                    <InputGroup mt={1}>
+                      <InputLeftAddon>
+                        <PhoneIcon w={4} h={4} borderRadius={2} />
+                      </InputLeftAddon>
+                      <Input
+                        variant="outline"
+                        type="tel"
+                        name="number"
+                        value={userData.number}
+                        onChange={handleChange}
+                        autoComplete="off"
                       />
-                    </InputLeftAddon>
-                    <Input
-                      variant="outline"
-                      type="tel"
-                      name="number"
-                      value={userData.number}
-                      onChange={handleChange}
-                    />
-                  </InputGroup>
+                    </InputGroup>
+                  </Card>
                 </FormControl>
                 <Flex gap={5}>
                   <Button
+                    variant={'brand'}
                     onClick={() => dispatch(closeModal())}
                     type="submit"
                     w="100%"
                     mt={5}
                     mb={2}
                     color="gray.700"
-                    bg="gray.200"
                     leftIcon={
                       <MinusIcon w={3} h={3} mr={'3px'} color={'black'} />
                     }
@@ -196,12 +187,12 @@ export const UpdateModal = () => {
                     Cancel
                   </Button>
                   <Button
+                    variant={'brand'}
                     type="submit"
                     w="100%"
                     mt={5}
                     mb={2}
                     color="gray.700"
-                    bg="gray.200"
                     leftIcon={
                       <CheckIcon w={3} h={3} mr={'3px'} color={'black'} />
                     }
@@ -217,7 +208,7 @@ export const UpdateModal = () => {
                   </Button>
                 </Flex>
               </Box>
-            </Box>
+            </Card>
           </Form>
         </Formik>
       </div>

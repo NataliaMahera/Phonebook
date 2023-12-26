@@ -20,9 +20,9 @@ const WelcomeCard = () => {
       variant="filled"
       w={['100vw', 400, 500]}
       p={5}
-      bg="gray.50"
       borderRadius="lg"
       borderColor="gray.100"
+      colorScheme={'brand'}
     >
       <CardHeader>
         <Heading

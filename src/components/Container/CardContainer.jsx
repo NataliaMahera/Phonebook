@@ -9,7 +9,7 @@ const CardContainer = ({ children }) => {
       variant="filled"
       w={['100vw', 400, 500]}
       p={5}
-      bg="gray.50"
+      colorScheme={'brand'}
       borderRadius="lg"
     >
       <CardHeader>

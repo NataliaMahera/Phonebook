@@ -10,6 +10,7 @@ import {
   AlertDialogOverlay,
   Box,
   Button,
+  Card,
   Flex,
   Text,
   useDisclosure,
@@ -19,6 +20,7 @@ import React from 'react';
 import { UpdateModal } from 'components/UpdateModal/UpdateModal';
 import { openModal } from 'redux/modal/modalReducer';
 import { selectIsOpenModal } from 'redux/modal/modalSelectors';
+import { createStandaloneToast } from '@chakra-ui/react';
 
 const ContactListItem = ({ id, name, number }) => {
   const dispatch = useDispatch();
@@ -28,117 +30,137 @@ const ContactListItem = ({ id, name, number }) => {
   // Alert delete window
   const cancelRef = React.useRef();
 
+  const { ToastContainer, toast } = createStandaloneToast();
+
+  const handleDelete = () => {
+    dispatch(deleteContactsThunk(id))
+      .unwrap()
+      .then(() =>
+        toast({
+          title: `${name} successfully deleted`,
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        })
+      );
+  };
+
   return (
-    <Flex
-      pr={5}
-      pl={5}
-      pb={2}
-      w={[300, 400, 500]}
-      justifyContent={'space-between'}
-      boxShadow={'2xl'}
-      borderRadius={10}
-    >
-      <Box
-        key={id}
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
+    <>
+      <Flex
+        pr={5}
+        pl={5}
+        pb={2}
+        w={[300, 400, 500]}
+        mb={3}
+        justifyContent={'space-between'}
+        boxShadow={'2xl'}
+        borderRadius={10}
       >
         <Box
-          w={8}
-          h={8}
+          key={id}
           display={'flex'}
           justifyContent={'center'}
           alignItems={'center'}
-          bgColor={'white'}
-          borderRadius={'50%'}
-          mr={2}
         >
-          <Box style={{ color: getRandomHexColor() }}>
-            {name.slice(0, 1).toUpperCase()}
-          </Box>
+          <Card
+            w={8}
+            h={8}
+            display={'flex'}
+            justifyContent={'center'}
+            alignItems={'center'}
+            variant={'brand'}
+            borderRadius={'50%'}
+            mr={2}
+          >
+            <Box style={{ color: getRandomHexColor() }}>
+              {name.slice(0, 1).toUpperCase()}
+            </Box>
+          </Card>
+          <Text
+            fontSize={{ base: '15px', md: '19px', lg: '19px' }}
+            variant={'brand'}
+          >
+            {name} : {number.slice(0, 13)}
+          </Text>
         </Box>
-        <Text
-          fontSize={{ base: '15px', md: '19px', lg: '19px' }}
-          color={'black'}
-        >
-          {name} : {number.slice(0, 13)}
-        </Text>
-      </Box>
 
-      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-        <Button
-          w={10}
-          h={10}
-          mr={2}
-          type="button"
-          onClick={onOpen}
-          bgColor="gray.200"
-        >
-          <DeleteIcon
-            w={4}
-            h={4}
-            // bgGradient="linear(to-r, green.200, pink.500)"
-            borderRadius={2}
-            color="gray.700"
-          />
-        </Button>
+        <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+          <Button
+            w={10}
+            h={10}
+            mr={2}
+            type="button"
+            onClick={onOpen}
+            variant={'brand'}
+            _hover={{
+              bgGradient:
+                'linear(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)',
+              transitionDuration: '0.3s',
+              transform: 'translateY(-5px)',
+              transitionTimingFunction: 'ease-in-out',
+            }}
+          >
+            <DeleteIcon w={4} h={4} borderRadius={2} color="gray.700" />
+          </Button>
 
-        <AlertDialog
-          isOpen={isOpen}
-          leastDestructiveRef={cancelRef}
-          onClose={onClose}
-        >
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader
-                color={'black'}
-                fontSize="lg"
-                fontWeight="bold"
-              >
-                Delete Contact
-              </AlertDialogHeader>
-
-              <AlertDialogBody color={'black'}>
-                Are you sure? You can't undo this action afterwards.
-              </AlertDialogBody>
-
-              <AlertDialogFooter>
-                <Button ref={cancelRef} onClick={onClose}>
-                  Cancel
-                </Button>
-
-                <Button
-                  colorScheme="red"
-                  onClick={() => dispatch(deleteContactsThunk(id))}
-                  ml={3}
+          <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay>
+              <AlertDialogContent>
+                <AlertDialogHeader
+                  variant={'brand'}
+                  fontSize="lg"
+                  fontWeight="bold"
                 >
-                  Delete
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
+                  <Text variant={'brand'}>Delete Contact</Text>
+                </AlertDialogHeader>
 
-        {/* Open update modal window */}
-        <Button
-          onClick={() => dispatch(openModal({ id, name, number }))}
-          type="button"
-          bgColor="gray.200"
-          w={10}
-          h={10}
-        >
-          <EditIcon
-            w={4}
-            h={4}
-            bgGradient="linear(to-r, green.200, pink.500)"
-            borderRadius={2}
-            color="black"
-          />
-        </Button>
-        {isOpenModal && <UpdateModal />}
-      </Box>
-    </Flex>
+                <AlertDialogBody variant={'brand'}>
+                  <Text variant={'brand'}>
+                    Are you sure? You can't undo this action afterwards.
+                  </Text>
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+
+                  <Button colorScheme="red" onClick={handleDelete} ml={3}>
+                    Delete
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+
+          {/* Open update modal window */}
+          <Button
+            onClick={() => dispatch(openModal({ id, name, number }))}
+            type="button"
+            variant={'brand'}
+            w={10}
+            h={10}
+            _hover={{
+              bgGradient:
+                'linear(225deg, #FF3CAC 0%, #784BA0 50%, #2B86C5 100%)',
+              transitionDuration: '0.3s',
+              transform: 'translateY(-5px)',
+              transitionTimingFunction: 'ease-in-out',
+            }}
+          >
+            <EditIcon w={4} h={4} borderRadius={2} color="black" />
+          </Button>
+          {isOpenModal && <UpdateModal />}
+        </Box>
+      </Flex>
+      <ToastContainer />
+    </>
   );
 };
 

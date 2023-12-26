@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectFilter } from 'redux/contacts/contactsSelectors';
 import { changeFilter } from 'redux/contacts/filterSlice';
 import {
+  Card,
   FormControl,
   FormLabel,
   Input,
@@ -31,25 +32,21 @@ const Filter = () => {
       >
         Find contact by name or phone
       </FormLabel>
-      <InputGroup mt={1}>
-        <InputLeftAddon>
-          <SearchIcon
-            w={4}
-            h={4}
-            bgGradient="linear(to-r, green.200, pink.500)"
-            borderRadius={2}
-            color="black"
+      <Card bg={'transparent'} variant={'brand'}>
+        <InputGroup mt={1} boxShadow="md">
+          <InputLeftAddon>
+            <SearchIcon w={4} h={4} borderRadius={2} />
+          </InputLeftAddon>
+          <Input
+            type="text"
+            name="filter"
+            value={filterQuery}
+            onChange={onChangeFilter}
+            autoComplete="off"
+            placeholder="Enter your contact"
           />
-        </InputLeftAddon>
-        <Input
-          type="text"
-          name="filter"
-          value={filterQuery}
-          onChange={onChangeFilter}
-          autoComplete="off"
-          placeholder="Enter your contact"
-        />
-      </InputGroup>
+        </InputGroup>
+      </Card>
     </FormControl>
   );
 };

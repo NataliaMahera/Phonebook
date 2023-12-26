@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Notify } from 'notiflix';
 import { instance } from 'redux/auth/authOperations';
+import { createStandaloneToast } from '@chakra-ui/react';
+
+const { toast } = createStandaloneToast();
 
 export const getContactsThunk = createAsyncThunk(
   'contacts/getAll',
@@ -19,10 +21,14 @@ export const addContactsThunk = createAsyncThunk(
   async ({ name, number }, thunkApi) => {
     try {
       const { data } = await instance.post('/contacts', { name, number });
-      Notify.success(`Contact ${name} added successfully`);
       return data;
     } catch (error) {
-      Notify.failure("Sorry, something's wrong");
+      toast({
+        title: "Sorry, something's wrong",
+        status: 'error',
+        position: 'top',
+        isClosable: true,
+      });
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -33,7 +39,6 @@ export const deleteContactsThunk = createAsyncThunk(
   async (contactId, thunkApi) => {
     try {
       const { data } = await instance.delete(`/contacts/${contactId}`);
-      Notify.warning(`Contact ${data.name} delete successfully`);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
@@ -43,12 +48,9 @@ export const deleteContactsThunk = createAsyncThunk(
 
 export const updateContactThunk = createAsyncThunk(
   'contacts/updateContact',
-  async (contactId, modalData, thunkApi) => {
+  async ({ contactId, formData }, thunkApi) => {
     try {
-      const { data } = await instance.patch(
-        `/contacts/${contactId}`,
-        modalData
-      );
+      const { data } = await instance.patch(`/contacts/${contactId}`, formData);
       return data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);

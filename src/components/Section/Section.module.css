@@ -1,9 +1,0 @@
-.phonebookContainer {
-    display: flex;
-    flex-direction: column;
-}
-
-.title {
-    color: rgba(63, 62, 62, 0.767);
-    font-size: 24px;
-}

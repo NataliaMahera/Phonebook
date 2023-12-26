@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { Notify } from 'notiflix';
+import { createStandaloneToast } from '@chakra-ui/react';
+
+const { toast } = createStandaloneToast();
 
 export const instance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com/',
@@ -22,7 +24,12 @@ export const registerThunk = createAsyncThunk(
       setToken(data.token);
       return data;
     } catch (error) {
-      Notify.failure(`We're sorry, something went wrong`);
+      toast({
+        title: 'Incorrect email or password. Please try again.',
+        status: 'warning',
+        position: 'top',
+        isClosable: true,
+      });
       return thunkApi.rejectWithValue(error.message);
     }
   }
@@ -34,9 +41,15 @@ export const loginThunk = createAsyncThunk(
     try {
       const { data } = await instance.post('/users/login', formData);
       setToken(data.token);
+
       return data;
     } catch (error) {
-      Notify.failure(`You entered an incorrect login or password`);
+      toast({
+        title: `You entered an incorrect login or password. Please try again.`,
+        status: 'error',
+        position: 'top',
+        isClosable: true,
+      });
       return thunkApi.rejectWithValue(error.message);
     }
   }
