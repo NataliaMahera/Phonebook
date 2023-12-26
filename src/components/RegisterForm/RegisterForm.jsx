@@ -78,7 +78,7 @@ const RegisterForm = () => {
   return (
     <Card
       colorScheme={'brand'}
-      w={[300, 400, 500]}
+      w={[350, 400, 500]}
       m="auto"
       mt={20}
       mb={20}
