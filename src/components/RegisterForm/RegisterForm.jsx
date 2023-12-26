@@ -17,7 +17,6 @@ import {
 } from '@chakra-ui/react';
 import {
   ArrowRightIcon,
-  AtSignIcon,
   EmailIcon,
   InfoOutlineIcon,
   LockIcon,
@@ -28,6 +27,7 @@ import {
 import { Link as NavLink } from 'react-router-dom';
 import { Formik, Form } from 'formik';
 import { useState } from 'react';
+import { AiOutlineUser } from 'react-icons/ai';
 
 const RegisterForm = () => {
   const [type, setType] = useState('password');
@@ -105,12 +105,12 @@ const RegisterForm = () => {
                 account.
               </Text>
               <FormLabel fontSize={'15px'} variant={'brand'}>
-                Full name
+                Username
               </FormLabel>
               <Card bg={'transparent'} variant={'brand'}>
                 <InputGroup>
                   <InputLeftAddon>
-                    <AtSignIcon w={4} h={4} />
+                    <AiOutlineUser />
                   </InputLeftAddon>
                   <Input
                     variant="outline"

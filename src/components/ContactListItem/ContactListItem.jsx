@@ -52,8 +52,9 @@ const ContactListItem = ({ id, name, number }) => {
         pr={5}
         pl={5}
         pb={2}
-        w={[300, 400, 500]}
+        w={[350, 400, 500]}
         mb={3}
+        gap={1}
         justifyContent={'space-between'}
         boxShadow={'2xl'}
         borderRadius={10}
@@ -61,7 +62,8 @@ const ContactListItem = ({ id, name, number }) => {
         <Box
           key={id}
           display={'flex'}
-          justifyContent={'center'}
+          justifyContent={'space-between'}
+          gap={2}
           alignItems={'center'}
         >
           <Card
@@ -72,18 +74,19 @@ const ContactListItem = ({ id, name, number }) => {
             alignItems={'center'}
             variant={'brand'}
             borderRadius={'50%'}
-            mr={2}
           >
             <Box style={{ color: getRandomHexColor() }}>
               {name.slice(0, 1).toUpperCase()}
             </Box>
           </Card>
-          <Text
-            fontSize={{ base: '15px', md: '19px', lg: '19px' }}
-            variant={'brand'}
-          >
-            {name} : {number.slice(0, 13)}
-          </Text>
+          <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
+            <Text
+              fontSize={{ base: '15px', md: '19px', lg: '19px' }}
+              variant={'brand'}
+            >
+              {name} : {number.slice(0, 13)}
+            </Text>
+          </Box>
         </Box>
 
         <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>

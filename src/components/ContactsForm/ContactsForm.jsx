@@ -22,13 +22,13 @@ import {
 } from '@chakra-ui/react';
 import {
   AddIcon,
-  AtSignIcon,
   ChatIcon,
   InfoOutlineIcon,
   PhoneIcon,
 } from '@chakra-ui/icons';
 
 import { createStandaloneToast } from '@chakra-ui/react';
+import { AiOutlineUser } from 'react-icons/ai';
 
 const ContactsForm = () => {
   const { ToastContainer, toast } = createStandaloneToast();
@@ -155,7 +155,7 @@ const ContactsForm = () => {
                 <Card bg={'transparent'} variant={'brand'} boxShadow="md">
                   <InputGroup mt={1}>
                     <InputLeftAddon>
-                      <AtSignIcon w={4} h={4} />
+                      <AiOutlineUser />
                     </InputLeftAddon>
                     <Input
                       variant="outline"

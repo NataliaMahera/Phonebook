@@ -1,6 +1,5 @@
 import css from './UpdateModal.module.css';
 import {
-  AtSignIcon,
   CheckIcon,
   InfoOutlineIcon,
   MinusIcon,
@@ -22,6 +21,7 @@ import {
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import React, { useEffect, useState } from 'react';
+import { AiOutlineUser } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateContactThunk } from 'redux/contacts/contactsOperations';
 import { closeModal } from 'redux/modal/modalReducer';
@@ -142,7 +142,7 @@ export const UpdateModal = () => {
                   <Card bg={'transparent'} variant={'brand'} boxShadow="md">
                     <InputGroup mt={1}>
                       <InputLeftAddon>
-                        <AtSignIcon w={4} h={4} borderRadius={2} />
+                        <AiOutlineUser />
                       </InputLeftAddon>
                       <Input
                         variant="outline"
