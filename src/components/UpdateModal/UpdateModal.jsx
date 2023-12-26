@@ -18,6 +18,7 @@ import {
   Flex,
   Card,
   Box,
+  useToast,
 } from '@chakra-ui/react';
 import { Formik, Form } from 'formik';
 import React, { useEffect, useState } from 'react';
@@ -27,6 +28,7 @@ import { closeModal } from 'redux/modal/modalReducer';
 import { selectModalData } from 'redux/modal/modalSelectors';
 
 export const UpdateModal = () => {
+  const toast = useToast();
   const dispatch = useDispatch();
   const modalData = useSelector(selectModalData);
 
@@ -43,8 +45,17 @@ export const UpdateModal = () => {
       number: userData.number,
     };
 
-    dispatch(updateContactThunk({ contactId: modalData.id, formData }));
-    console.log(formData);
+    dispatch(updateContactThunk({ contactId: modalData.id, formData }))
+      .unwrap()
+      .then(() =>
+        toast({
+          title: 'Updated successfully!',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        })
+      );
 
     dispatch(closeModal());
   };

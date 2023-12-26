@@ -64,7 +64,7 @@ const RegisterForm = () => {
       .unwrap()
       .then(() =>
         toast({
-          title: 'Submitted!',
+          title: 'Congrats, you are registered!',
           status: 'success',
           duration: 3000,
           isClosable: true,
