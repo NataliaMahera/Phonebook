@@ -6,7 +6,7 @@ const Layout = ({ children }) => {
   return (
     <>
       <AppBar />
-      <Box h={'100vh'}>
+      <Box minH={'75vh'}>
         <main>{children}</main>
       </Box>
       <Footer />

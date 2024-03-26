@@ -16,6 +16,7 @@ const WelcomeCard = () => {
   return (
     <Card
       margin={'auto'}
+      mt={20}
       align="center"
       variant="filled"
       w={['100vw', 400, 500]}
